@@ -174,4 +174,4 @@ cython_debug/
 .pypirc
 
 # Syncing to Google Drive as well to keep with other class files
-.tmp.driveupload
+.tmp.driveupload/
