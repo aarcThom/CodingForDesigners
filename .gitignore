@@ -172,3 +172,6 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Syncing to Google Drive as well to keep with other class files
+.tmp.driveupload
