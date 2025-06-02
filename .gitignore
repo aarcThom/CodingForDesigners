@@ -176,6 +176,7 @@ cython_debug/
 # Syncing to Google Drive as well to keep with other class files
 # Windows folder settings
 .tmp.driveupload/
+.tmp.drivedownload/
 .ini
 
 # lecture prep files
