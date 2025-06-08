@@ -28,6 +28,8 @@ def _get_multiplier(attacker:str, defender:str, pokedex:dict) -> float:
 
     #adjust the multiplier for each of defenders types
     for mon_type in attacker_types:
+        if mon_type == "fighting": # we need to add this in since 'against fighting isn't in the json file
+            mon_type = "normal"
         mult_key = f"against_{mon_type}" # for example 'bug' -> 'against_bug' - get the key for mon1 dict
         mult_val = defend_stats[mult_key]
         multiplier *= mult_val # multiply the multiplier

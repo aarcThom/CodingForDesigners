@@ -15,7 +15,7 @@ def load_pokedex() -> dict:
 
 
 # creating the pokemon selection function
-def _pick_mon(pokedex:dict) -> str:
+def pick_mon(pokedex:dict) -> str:
     """Given user input, tests name of pokemon if in pokedex, or a random pokemon name if name not found.
 
     Args:
@@ -40,32 +40,30 @@ def _pick_mon(pokedex:dict) -> str:
 
 
 # picking multiple pokemon
-def pick_team(team_num:int, pokedex:dict) -> dict[str, int]:
+def pick_team(team_num:int, pokedex:dict) -> list[str]:
     """Prompts user 'team_num' times to pick a pokemon.
-       Returns a a dictionary of pokemon names + HP stat.
+       Returns a list of all picked pokemon names.
 
     Args:
         team_num (int): Number of pokemon on team
         pokedex (dict): The pokemon dictionary
 
     Returns:
-        dict[str, int]: Pokemon name and hp stats
+        list[str]: The names of the pokemon on user's team
     """
 
-    team = {} # create empty dictionary to hold team member names
+    team = [] # create empty list to hold team member names
 
     # iterate 'team_num' times
     for i in range(team_num):
-        team_member = _pick_mon(pokedex) # run the pick pokemon function
-        hp = pokedex[team_member]["hp"] # pick the hp value from the chosen pokemon
-        team[team_member] = hp
+        team_member = pick_mon(pokedex) # run the pick pokemon function
+        team.append(team_member) # add the member to the team
     
     return team
 
 
-
 # creating a function to pick opponents' team
-def opponent_team(num_mons:int, pokedex:dict) -> dict[str, int]:
+def opponent_team(num_mons:int, pokedex:dict) -> list[str]:
     """Given 'num_mons', returns that many pokemon for opponent's team.
 
     Args:
@@ -73,32 +71,16 @@ def opponent_team(num_mons:int, pokedex:dict) -> dict[str, int]:
         pokedex (dict): Dictionary of pokemon
 
     Returns:
-        dict[str, int]: Pokemon name and hp stats
+        list[str]: The names of the pokemon on opponent's team
     """
 
-    team = {} # empty dict to hold pokemon names
+    team = [] # empty list to hold pokemon names
 
     for i in range(num_mons):
         random_mon = random.choice(list(pokedex.keys())) # pick a random pokemon
-        hp = pokedex[random_mon]["hp"] # pick the hp value from the chosen pokemon
-        team[random_mon] = hp
+        team.append(random_mon) # Add it to the list
 
-
-    # need to just grab the keys for the message - so we can have a list
-    team_names = list(team.keys())
-    # message printed if there is only 1 pokemon
-    if len(team_names) == 1:
-        print(f"Your opponent chose {team_names[0]}!")
-        return team 
-
-    # more than 1
-    message = "Your opponent chose: "
-    for name in team_names:
-        if name != team_names[-1]:
-            message += f"{name}, "
-        else:
-            message += f"and {name}!"
-
-    print(message)
+        # Add the message
+        print(f"Your opponent chose {random_mon}!")
 
     return team
